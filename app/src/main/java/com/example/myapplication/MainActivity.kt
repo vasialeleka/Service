@@ -10,6 +10,9 @@ import android.support.v4.content.LocalBroadcastManager
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import android.R.attr.key
+
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var intentServise: Intent
@@ -21,9 +24,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         buttonStart.setOnClickListener(this)
         buttonStop.setOnClickListener(this)
         intentServise = Intent(this, MyService::class.java)
+        intentServise.putExtra("data","data for service")
+
+
         br = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 text.text = intent!!.getStringExtra("String")
+                dataForService.text = intent!!.getStringExtra("dataFrom")
             }
 
         }
